@@ -1,6 +1,6 @@
 import argparse
 
-from . import ToisanGrammar
+from . import ToisanCompiler, ToisanGrammar
 
 
 parser = argparse.ArgumentParser(
@@ -18,4 +18,4 @@ if args.tree:
     pare_tree = ToisanGrammar.parse(args.program)
     print(ToisanGrammar.repr_parse_tree(pare_tree))
 else:
-    raise NotImplementedError("tree_factory not implemented")
+    print(ToisanGrammar.parse(args.program, tree_factory=ToisanCompiler().tree_factory))
