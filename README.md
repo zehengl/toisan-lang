@@ -1,5 +1,5 @@
 <div align="center">
-    <img src="logo.jpg" alt="taishan" height="128">
+    <img src="logo.jpg" alt="taishan" height="196">
 </div>
 
 # toisan-lang
