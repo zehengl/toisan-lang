@@ -34,13 +34,13 @@ class ToisanGrammar(Grammar):
 
     boolean = T.true | T.false
     number = T.arabic_numeral | T.chinese_numeral
-    variable_ref = List(T.name, Token("个"), min=1)
+    variable_ref = List(T.name, Token(K.dot_notation), min=1)
     subscript_exp = prefix_exp + "【" + exp + "】"
     var = variable_ref | subscript_exp
     var_list = List(var, "，", min=1)
     exp_list = List(exp, "，", min=1)
 
-    block = Repeat(statement + Token("。"))
+    block = Repeat(statement + Tokens("。 ； ！"))
     begin_scope = THIS * 0
     end_scope = THIS * 0
     loop = THIS * 0
