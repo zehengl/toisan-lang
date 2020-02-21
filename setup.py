@@ -21,8 +21,8 @@ setup(
     author_email="imzehengl@gmail.com",
     maintainer="Zeheng Li",
     maintainer_email="imzehengl@gmail.com",
-    description="A programming language based on Toisan Wah, aka Taishanese, a dialect of Cantonese",
+    description="A programming language based on Toisanese, aka Taishanese, a dialect of Cantonese",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/zehengl/toishan-lang",
+    url="https://github.com/zehengl/toisan-lang",
 )

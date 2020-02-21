@@ -1,7 +1,18 @@
-import datetime
-import operator
+from lrparsing import (
+    THIS,
+    Grammar,
+    List,
+    Opt,
+    Prio,
+    Ref,
+    Repeat,
+    Token,
+    TokenRegistry,
+    Tokens,
+)
 
-from lrparsing import Grammar, Prio, Ref, Token, TokenRegistry, Tokens
+
+from .keyword import ToisanKeyword as K, keywords
 
 
 class ToisanGrammar(Grammar):
@@ -10,81 +21,74 @@ class ToisanGrammar(Grammar):
     """
 
     class T(TokenRegistry):
-        number1 = Token(re="[0-9]+")
-        number1["eval"] = lambda node: int(node[1])
+        name = Token(re=fr"((?![{keywords}0-9])[a-zA-Z\u4e00-\u9fff])+")
+        string = Token(re=r"“[^“”]*”")
+        arabic_numeral = Token(re="[0-9]+")
+        chinese_numeral = Token(re=rf"[{K.re_number}]")
+        true = Token(re=rf"[{K.re_true}]")
+        false = Token(re=rf"[{K.re_false}]")
 
-        number2 = Token(re=r"[零一二三四五六七八九十]")
-        number2["eval"] = lambda node: {
-            "零": 0,
-            "一": 1,
-            "二": 2,
-            "三": 3,
-            "四": 4,
-            "五": 5,
-            "六": 6,
-            "七": 7,
-            "八": 8,
-            "九": 9,
-            "十": 10,
-        }[node[1]]
+    exp = Ref("exp")
+    prefix_exp = Ref("prefix_exp")
+    statement = Ref("statement")
 
-        now = Token("丐时")
-        now["eval"] = lambda _: datetime.datetime.now()
+    boolean = T.true | T.false
+    number = T.arabic_numeral | T.chinese_numeral
+    variable_ref = List(T.name, Token("个"), min=1)
+    subscript_exp = prefix_exp + "【" + exp + "】"
+    var = variable_ref | subscript_exp
+    var_list = List(var, "，", min=1)
+    exp_list = List(exp, "，", min=1)
 
-        true = Token(re=r"[真对]")
-        true["eval"] = lambda _: True
+    block = Repeat(statement + Token("。"))
+    begin_scope = THIS * 0
+    end_scope = THIS * 0
+    loop = THIS * 0
+    begin_loop_scope = begin_scope + loop
+    scope = begin_scope + block + end_scope
+    loop_scope = begin_loop_scope + block + end_scope
 
-        false = Token(re=r"[假错]")
-        false["eval"] = lambda _: False
+    adjusted_exp = "（" + exp + "）"
+    constant = boolean | number | T.string
 
-    expression = Ref("expression")
+    prefix_exp = Prio(adjusted_exp, var)
 
-    truth = expression >> "岩唔岩啊"
-    truth["eval"] = lambda node: operator.truth(node[1])
+    now = Token(K.now)
+    truth = exp << Token(K.truth)
+    greater_than = exp << Token(K.greater_than) << exp
+    less_than = exp << Token(K.less_than) << exp
+    add = exp << Token(K.add) << exp
+    subtract = exp << Token(K.subtract) << exp
+    multiply = exp << Token(K.multiply) << exp
+    divide = exp << Token(K.divide) << exp
+    inverse_divide = exp << Token(K.inverse_divide) << exp
+    add_one = exp << Token(K.add_one)
+    subtract_one = exp << Token(K.subtract_one)
 
-    greater_than = expression >> "大过" >> expression
-    less_than = expression >> "细过" >> expression
-    add = expression >> "加" >> expression
-    subtract = expression >> "减" >> expression
-    multiply = expression >> "乘" >> expression
-    divide = expression >> "除以" >> expression
-    binary_op = {
-        "大过": operator.gt,
-        "细过": operator.lt,
-        "加": operator.add,
-        "减": operator.sub,
-        "乘": operator.mul,
-        "除以": operator.truediv,
-    }
-    eval_binary_op = lambda node: ToisanGrammar.binary_op[node[2]](node[1], node[3])
-    greater_than["eval"] = eval_binary_op
-    less_than["eval"] = eval_binary_op
-    add["eval"] = eval_binary_op
-    subtract["eval"] = eval_binary_op
-    multiply["eval"] = eval_binary_op
-    divide["eval"] = eval_binary_op
-
-    add_one = expression >> "多伱"
-    subtract_one = expression >> "少伱"
-    increment_op = {"多伱": operator.add, "少伱": operator.sub}
-    eval_increment_op = lambda node: ToisanGrammar.increment_op[node[2]](node[1], 1)
-    add_one["eval"] = eval_increment_op
-    subtract_one["eval"] = eval_increment_op
-
-    expression = Prio(
-        (T.true | T.false | T.number1 | T.number2 | T.now),
-        add_one,
-        subtract_one,
-        add,
-        subtract,
-        multiply,
-        divide,
-        (greater_than | less_than),
+    exp = Prio(
+        constant,
+        prefix_exp,
+        now,
         truth,
+        multiply | divide | inverse_divide,
+        add_one | subtract_one,
+        add | subtract,
+        greater_than | less_than,
     )
 
-    START = expression
+    st_assign = var_list + Token(K.assign) + exp_list
 
-    @classmethod
-    def eval_node(cls, node):
-        return node[1] if "eval" not in node[0] else node[0]["eval"](node)
+    st_if = (
+        Token(K._if_)
+        + exp
+        + Token(K.then)
+        + scope
+        + Repeat(Token(K._elif_) + exp + Token(K.then) + scope)
+        + Opt(Token(K._else_) + scope)
+    )
+
+    statement = st_assign | st_if
+
+    begin_program = begin_scope * 1
+    end_program = end_scope * 1
+    START = begin_program + block + end_program
