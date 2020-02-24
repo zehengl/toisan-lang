@@ -87,7 +87,9 @@ class ToisanGrammar(Grammar):
         + Opt(Token(K._else_) + scope)
     )
 
-    statement = st_assign | st_if
+    st_print = Token(K._print_) + var
+
+    statement = st_assign | st_if | st_print
 
     begin_program = begin_scope * 1
     end_program = end_scope * 1
