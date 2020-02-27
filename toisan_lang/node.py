@@ -35,6 +35,39 @@ class ToisanNode(tuple):
         assert result.compiled is not None, str(result.rule)
         return result
 
+    def constant(self, compiler):
+        rule = self.rhs[0].rule
+        token = self.rhs[0].compiled[0]
+
+        if rule is ToisanGrammar.T.string:
+            result = f"'{token[1:-1]}'"
+        elif token in K.re_number:
+            result = {
+                "零": "0",
+                "一": "1",
+                "二": "2",
+                "三": "3",
+                "四": "4",
+                "五": "5",
+                "六": "6",
+                "七": "7",
+                "八": "8",
+                "九": "9",
+                "十": "10",
+            }[token]
+        elif token in K.re_true:
+            result = "True"
+        elif token in K.re_false:
+            result = "False"
+        else:
+            result = token
+
+        return (result,)
+
+    def adjusted_exp(self, compiler):
+        exp = self.rhs[1]
+        return exp.compiled
+
     def st_assign(self, compiler):
         var_list, exp_list = self.rhs[0], self.rhs[2]
         return [var_list.compiled, "=", exp_list.compiled]
