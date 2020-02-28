@@ -1,6 +1,7 @@
 from lrparsing import Token
-from .keyword import ToisanKeyword as K
+
 from .grammar import ToisanGrammar
+from .keyword import ToisanKeyword as K
 
 
 class ToisanNode(tuple):
@@ -64,9 +65,54 @@ class ToisanNode(tuple):
 
         return (result,)
 
+    def _binary_op(self, op, left, right):
+        if op == K.inverse_divide:
+            left, right = right, left
+
+        mapping = {
+            K.add: "+",
+            K.subtract: "-",
+            K.multiply: "*",
+            K.divide: "/",
+            K.inverse_divide: "/",
+            K.greater_than: ">",
+            K.less_than: "<",
+        }
+        return tuple([left, mapping[op], right])
+
+    def _unary_op(self, op, left):
+        if op == K.truth:
+            return tuple(["bool(", left, ")"])
+        if op == K.add_one:
+            return tuple([left, "+", "1"])
+        if op == K.subtract_one:
+            return tuple([left, "-", "1"])
+        raise NotImplementedError(op)
+
+    def exp(self, compiler):
+        rule = self.rhs[0].rule
+        rhs = self.rhs[0].rhs
+
+        if len(rhs) == 3:
+            return self._binary_op(rhs[1].token, rhs[0].compiled, rhs[2].compiled)
+        elif len(rhs) == 2:
+            return self._unary_op(rhs[1].token, rhs[0].compiled)
+        elif rule is ToisanGrammar.now:
+            return ("datetime.now()",)
+        elif rule is ToisanGrammar.dict_init:
+            return ("dict()",)
+
+        return self.rhs[0].compiled
+
+    def variable_ref(self, compiler):
+        path = [self.rhs[i].token for i in range(0, len(self.rhs), 2)]
+        compiled = path[0]
+        for key in path[1:]:
+            compiled += f"['{key}']"
+        return (compiled,)
+
     def adjusted_exp(self, compiler):
-        exp = self.rhs[1]
-        return exp.compiled
+        return tuple(["(", self.rhs[1].compiled, ")"])
 
     def st_assign(self, compiler):
         var_list, exp_list = self.rhs[0], self.rhs[2]
@@ -104,6 +150,9 @@ class ToisanNode(tuple):
         begin_program, block = self.rhs[0], self.rhs[1]
 
         return (
+            ["from datetime import datetime"],
+            [""],
+            [""],
             ["def main():"],
             self.INDENT,
             # begin_program.data.scope.compile(),

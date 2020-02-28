@@ -25,6 +25,7 @@ class ToisanKeyword:
     _in_ = "喺"
     dot_notation = "个"
     _print_ = "讲"
+    dict_init = "嚿叉烧"
 
     re_number = "零一二三四五六七八九十"
     re_true = "真对"

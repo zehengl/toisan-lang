@@ -53,6 +53,7 @@ class ToisanGrammar(Grammar):
 
     prefix_exp = Prio(adjusted_exp, var)
 
+    dict_init = Token(K.dict_init)
     now = Token(K.now)
     truth = exp << Token(K.truth)
     greater_than = exp << Token(K.greater_than) << exp
@@ -69,6 +70,7 @@ class ToisanGrammar(Grammar):
         constant,
         prefix_exp,
         now,
+        dict_init,
         truth,
         multiply | divide | inverse_divide,
         add_one | subtract_one,
@@ -87,7 +89,7 @@ class ToisanGrammar(Grammar):
         + Opt(Token(K._else_) + scope)
     )
 
-    st_print = Token(K._print_) + var
+    st_print = Token(K._print_) + (var | adjusted_exp)
 
     statement = st_assign | st_if | st_print
 

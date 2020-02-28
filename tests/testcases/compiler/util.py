@@ -1,4 +1,6 @@
-_template = """def main():
+_template = """from datetime import datetime
+
+def main():
 {{ program }}
 
 if __name__ == '__main__':

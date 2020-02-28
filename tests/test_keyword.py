@@ -14,6 +14,7 @@ def test_keywords():
         + ToisanKeyword.add
         + ToisanKeyword.add_one
         + ToisanKeyword.assign
+        + ToisanKeyword.dict_init
         + ToisanKeyword.divide
         + ToisanKeyword.dot_notation
         + ToisanKeyword.end
