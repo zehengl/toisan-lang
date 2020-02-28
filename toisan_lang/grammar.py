@@ -65,6 +65,8 @@ class ToisanGrammar(Grammar):
     inverse_divide = exp << Token(K.inverse_divide) << exp
     add_one = exp << Token(K.add_one)
     subtract_one = exp << Token(K.subtract_one)
+    logic_and = exp << Token(K._and_) << exp
+    logic_or = exp << Token(K._or_) << exp
 
     exp = Prio(
         constant,
@@ -76,6 +78,8 @@ class ToisanGrammar(Grammar):
         add_one | subtract_one,
         add | subtract,
         greater_than | less_than,
+        logic_and,
+        logic_or,
     )
 
     st_assign = var_list + Token(K.assign) + exp_list
