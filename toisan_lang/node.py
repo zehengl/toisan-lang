@@ -75,6 +75,28 @@ class ToisanNode(tuple):
     def st_print(self, compiler):
         return ["print(", self.rhs[1].compiled, ")"]
 
+    def st_if(self, compiler):
+        compiled = []
+        i = 0
+        while i < len(self.rhs) and (
+            self.rhs[i].token == "如果" or self.rhs[i].token == "或者"
+        ):
+            kwd, condition, scope = (self.rhs[i], self.rhs[i + 1], self.rhs[i + 3])
+            ife = "if" if kwd.token == "如果" else "elif"
+            compiled.extend(
+                [
+                    [ife, condition.compiled, ":"],
+                    self.INDENT,
+                    scope.compiled,
+                    self.OUTDENT,
+                ]
+            )
+            i += 4
+        if i < len(self.rhs) and self.rhs[i].token == "else":
+            scope = self.rhs[i + 1]
+            compiled.extend([["else:"], self.INDENT, scope.compiled, self.OUTDENT])
+        return tuple(compiled)
+
     def block(self, compiler):
         return tuple(s.compiled for s in self.rhs if not isinstance(s.rule, Token))
 
