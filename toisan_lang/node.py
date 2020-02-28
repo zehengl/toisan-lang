@@ -93,5 +93,3 @@ class ToisanNode(tuple):
             ["main()"],
             self.OUTDENT,
         )
-
-    pass
