@@ -9,6 +9,7 @@ program6 = "你系错。讲你。"
 program7 = "你系十。讲你。"
 program8 = "你系嚿叉烧。讲你。"
 program9 = "你系丐时。讲你。"
+program10 = "a，b系1，2。讲a。讲b。"
 
 transpile1 = [(1, "你 = 123"), (1, "print( 你 )")]
 transpile2 = [(1, "你 = '1a2b3c你好'"), (1, "print( 你 )")]
@@ -19,6 +20,7 @@ transpile6 = [(1, "你 = False"), (1, "print( 你 )")]
 transpile7 = [(1, "你 = 10"), (1, "print( 你 )")]
 transpile8 = [(1, "你 = dict()"), (1, "print( 你 )")]
 transpile9 = [(1, "你 = datetime.now()"), (1, "print( 你 )")]
+transpile10 = [(1, "a , b = 1 , 2"), (1, "print( a )"), (1, "print( b )")]
 
 
 data = [
@@ -31,4 +33,5 @@ data = [
     (program7, inject(transpile7)),
     (program8, inject(transpile8)),
     (program9, inject(transpile9)),
+    (program10, inject(transpile10)),
 ]

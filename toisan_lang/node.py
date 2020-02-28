@@ -28,7 +28,10 @@ class ToisanNode(tuple):
         if name in cls.__dict__:
             result.compiled = cls.__dict__[name](result, compiler)
         elif isinstance(result.rule, Token):
-            result.compiled = (result.token,)
+            token = result.token
+            if token == "，":
+                token = ","
+            result.compiled = (token,)
         elif len(nodes) == 2:
             result.compiled = nodes[1].compiled
         else:
@@ -112,7 +115,7 @@ class ToisanNode(tuple):
         return (compiled,)
 
     def adjusted_exp(self, compiler):
-        return tuple(["(", self.rhs[1].compiled, ")"])
+        return ("(", self.rhs[1].compiled, ")")
 
     def st_assign(self, compiler):
         var_list, exp_list = self.rhs[0], self.rhs[2]
