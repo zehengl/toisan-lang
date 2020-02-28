@@ -79,10 +79,10 @@ class ToisanNode(tuple):
         compiled = []
         i = 0
         while i < len(self.rhs) and (
-            self.rhs[i].token == "如果" or self.rhs[i].token == "或者"
+            self.rhs[i].token == K._if_ or self.rhs[i].token == K._elif_
         ):
             kwd, condition, scope = (self.rhs[i], self.rhs[i + 1], self.rhs[i + 3])
-            ife = "if" if kwd.token == "如果" else "elif"
+            ife = "if" if kwd.token == K._if_ else "elif"
             compiled.extend(
                 [
                     [ife, condition.compiled, ":"],
@@ -92,7 +92,7 @@ class ToisanNode(tuple):
                 ]
             )
             i += 4
-        if i < len(self.rhs) and self.rhs[i].token == "else":
+        if i < len(self.rhs) and self.rhs[i].token == K._else_:
             scope = self.rhs[i + 1]
             compiled.extend([["else:"], self.INDENT, scope.compiled, self.OUTDENT])
         return tuple(compiled)
