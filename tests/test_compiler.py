@@ -13,5 +13,5 @@ def test_assign_statement(program, transpiled):
     toisan_compiler = ToisanCompiler()
     tree_factory = toisan_compiler.tree_factory
     _ = ToisanGrammar.parse(program, tree_factory=tree_factory)
-    print(toisan_compiler.compiled())
+
     assert transpiled == toisan_compiler.compiled()
