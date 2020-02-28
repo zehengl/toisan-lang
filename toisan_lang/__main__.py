@@ -1,5 +1,7 @@
 import argparse
 
+from lrparsing import ParseError
+
 from . import ToisanCompiler, ToisanGrammar
 
 
@@ -10,25 +12,40 @@ parser = argparse.ArgumentParser(
     )
 )
 parser.add_argument("program", type=str, nargs=1, help="program written in toisan-lang")
-parser.add_argument("--tree", action="store_true", help="show the parse tree")
-parser.add_argument("--code", action="store_true", help="show the transpiled code")
+parser.add_argument("--show", type=str, nargs="+", help="show extra information")
 args = parser.parse_args()
 
 program = args.program
-show_tree = args.tree
-show_code = args.code
+show = args.show or []
 
-if show_tree and show_code:
-    print("Flag --code is omitted.")
+show_code, show_tree = False, False
+
+if "code" in show:
+    show_code = True
+
+if "tree" in show:
+    show_tree = True
+
+other_options = set(show) - set(["code", "tree"])
+if other_options:
+    print(f"ignore invalid options: {other_options}")
+
 
 toisan_compiler = ToisanCompiler()
 tree_factory = toisan_compiler.tree_factory
-parse_tree = ToisanGrammar.parse(program, tree_factory=tree_factory)
+try:
+    parse_tree = ToisanGrammar.parse(program, tree_factory=tree_factory)
+except ParseError:
+    raise RuntimeError("唔知你讲么")
+
+transpiled = toisan_compiler.compiled()
 
 if show_tree:
+    print("\nParse Tree:")
     print(ToisanGrammar.repr_parse_tree(parse_tree))
-else:
-    transpiled = toisan_compiler.compiled()
-    if show_code:
-        print(transpiled)
-    exec(transpiled)
+
+if show_code:
+    print("\nTranspiled Python Code:")
+    print(transpiled)
+
+exec(transpiled)

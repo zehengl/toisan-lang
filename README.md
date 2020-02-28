@@ -13,44 +13,45 @@ A programming language based on Toisanese, aka Taishanese, a dialect of Cantones
 ## Usage
 
 - `python -m toisan_lang "..."` to transpile and execute toisan-lang in Python
-- `--tree` to only show parse tree
-- `--code` to show transpiled code before execution
+- `--show xxx` to show extra information if given: `tree` for parse tree, `code` for transpiled python code
 
 For example,
 
-### Show the parse tree without execution
+### Transpile and execute
 
-    python -m toisan_lang "你系1。讲你。" --tree
+    python -m toisan_lang "你系10。讲你。"
+
+Output:
+
+`10`
+
+### Show extra information
+
+    python -m toisan_lang "你系10。讲你。" --show tree code
 
 Output:
 
 ```
+Parse Tree:
 (START
   (begin_program (begin_scope))
   (block
     (statement (st_assign
       (var_list (var (variable_ref '你'))) '系'
-      (exp_list (exp (constant (number '1')))))) '。'
+      (exp_list (exp (constant (number '十')))))) '。'
     (statement (st_print '讲' (var
       (variable_ref '你'))) '。')
   (end_program (end_scope)))
-```
 
-### Transpile and execute
-
-    python -m toisan_lang "你系1。讲你。" --code
-
-Output:
-
-```
+Transpiled Python Code:
 def main():
-    你 = 1
+    你 = 10
     print( 你 )
 
 if __name__ == '__main__':
     main()
 
-1
+10
 ```
 
 ## Develop
