@@ -19,7 +19,6 @@ class ToisanKeyword:
     _elif_ = "或者"
     _else_ = "唔系个话"
     assign = "系"
-    end = "咯"
     _or_ = "抑或"
     _and_ = "同埋"
     _in_ = "喺"
@@ -27,6 +26,7 @@ class ToisanKeyword:
     _print_ = "讲"
     dict_init = "嚿叉烧"
 
+    re_ending = "囖呀啊哇咯呢"
     re_number = "零一二三四五六七八九十"
     re_true = "真对"
     re_false = "假错"

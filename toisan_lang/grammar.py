@@ -40,7 +40,7 @@ class ToisanGrammar(Grammar):
     var_list = List(var, "，", min=1)
     exp_list = List(exp, "，", min=1)
 
-    block = Repeat(statement + Tokens("。 ； ！"))
+    block = Repeat(statement + Opt(Token(re=rf"[{K.re_ending}]")) + Tokens("。 ； ！"))
     begin_scope = THIS * 0
     end_scope = THIS * 0
     loop = THIS * 0

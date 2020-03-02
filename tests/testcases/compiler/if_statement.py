@@ -1,7 +1,7 @@
 from .util import inject
 
 program1 = "如果一加一细过2咪你系错。唔系个话区系真。。"
-program2 = "如果我乘3大过2咪你系错。或者我减1细过0咪呆系“haha”。唔系个话区系真。。"
+program2 = "如果我乘3大过2咪你系错。或者我减1细过0咪呆系“haha”。唔系个话区系真咯。。"
 
 transpile1 = [
     (1, "if 1 + 1 < 2 :"),
