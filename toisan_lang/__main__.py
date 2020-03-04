@@ -1,8 +1,7 @@
 import argparse
 
-from lrparsing import ParseError
 
-from . import ToisanCompiler, ToisanGrammar
+from . import parse
 
 
 parser = argparse.ArgumentParser(
@@ -30,19 +29,11 @@ other_options = set(show) - set(["code", "tree"])
 if other_options:
     print(f"ignore invalid options: {other_options}")
 
-
-toisan_compiler = ToisanCompiler()
-tree_factory = toisan_compiler.tree_factory
-try:
-    parse_tree = ToisanGrammar.parse(program, tree_factory=tree_factory)
-except ParseError:
-    raise RuntimeError("唔知你讲么")
-
-transpiled = toisan_compiler.compiled()
+transpiled, parse_tree = parse(program)
 
 if show_tree:
     print("\nParse Tree:")
-    print(ToisanGrammar.repr_parse_tree(parse_tree))
+    print(parse_tree)
 
 if show_code:
     print("\nTranspiled Python Code:")

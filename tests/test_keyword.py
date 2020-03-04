@@ -13,6 +13,7 @@ def test_keywords():
         + ToisanKeyword._print_
         + ToisanKeyword.add
         + ToisanKeyword.add_one
+        + ToisanKeyword.as_long_as
         + ToisanKeyword.assign
         + ToisanKeyword.dict_init
         + ToisanKeyword.divide
@@ -22,6 +23,7 @@ def test_keywords():
         + ToisanKeyword.less_than
         + ToisanKeyword.multiply
         + ToisanKeyword.now
+        + ToisanKeyword.print_ending
         + ToisanKeyword.re_ending
         + ToisanKeyword.re_false
         + ToisanKeyword.re_number

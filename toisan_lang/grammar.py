@@ -93,9 +93,11 @@ class ToisanGrammar(Grammar):
         + Opt(Token(K._else_) + scope)
     )
 
-    st_print = Token(K._print_) + (var | adjusted_exp)
+    st_as_long_as = Token(K.as_long_as) + exp + Token(K.then) + loop_scope
 
-    statement = st_assign | st_if | st_print
+    st_print = Token(K._print_) + (var | adjusted_exp) + Token(K.print_ending)
+
+    statement = st_assign | st_if | st_print | st_as_long_as
 
     begin_program = begin_scope * 1
     end_program = end_scope * 1

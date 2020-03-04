@@ -1,15 +1,15 @@
 from .util import inject
 
-program1 = "你系123咯。讲你。"
-program2 = "你系“1a2b3c你好”啊。讲你。"
-program3 = "你系真呢。讲你。"
-program4 = "你系假囖。讲你。"
-program5 = "你系对呀。讲你。"
-program6 = "你系错哇。讲你。"
-program7 = "你系十呢。讲你。"
-program8 = "你系嚿叉烧。讲你。"
-program9 = "你系丐时。讲你。"
-program10 = "a，b系1，2。讲a。讲b。"
+program1 = "你系123咯。睇下你系乜咯。"
+program2 = "你系“1a2b3c你好”啊。睇下你系乜。"
+program3 = "你系真呢。睇下你系乜哇。"
+program4 = "你系假囖。睇下你系乜。"
+program5 = "你系对呀。睇下你系乜呀。"
+program6 = "你系错哇。睇下你系乜。"
+program7 = "你系十呢。睇下你系乜。"
+program8 = "你系嚿叉烧。睇下你系乜。"
+program9 = "你系丐时。睇下你系乜。"
+program10 = "a，b系1，2。睇下a系乜。睇下b系乜。"
 
 transpile1 = [(1, "你 = 123"), (1, "print( 你 )")]
 transpile2 = [(1, "你 = '1a2b3c你好'"), (1, "print( 你 )")]

@@ -148,6 +148,15 @@ class ToisanNode(tuple):
             compiled.extend([["else:"], self.INDENT, scope.compiled, self.OUTDENT])
         return tuple(compiled)
 
+    def st_as_long_as(self, compiler):
+        condition, loop_scope = self.rhs[1], self.rhs[3]
+        return (
+            ["while", condition.compiled, ":"],
+            self.INDENT,
+            loop_scope.compiled,
+            self.OUTDENT,
+        )
+
     def block(self, compiler):
         return tuple(s.compiled for s in self.rhs if not isinstance(s.rule, Token))
 

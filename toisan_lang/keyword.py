@@ -23,8 +23,10 @@ class ToisanKeyword:
     _and_ = "同埋"
     _in_ = "喺"
     dot_notation = "个"
-    _print_ = "讲"
+    _print_ = "睇下"
+    print_ending = "系乜"
     dict_init = "嚿叉烧"
+    as_long_as = "只要"
 
     re_ending = "囖呀啊哇咯呢"
     re_number = "零一二三四五六七八九十"

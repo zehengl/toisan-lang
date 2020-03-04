@@ -1,17 +1,16 @@
 import pytest
 
-from toisan_lang import ToisanCompiler, ToisanGrammar
+from toisan_lang import parse
 
+from .testcases.compiler.as_long_as_statement import data as data_as_long_as_statement
 from .testcases.compiler.assign_statement import data as data_assign_statement
 from .testcases.compiler.if_statement import data as data_if_statement
 
-data = data_assign_statement + data_if_statement
+data = data_assign_statement + data_if_statement + data_as_long_as_statement
 
 
-@pytest.mark.parametrize("program, transpiled", data)
-def test_assign_statement(program, transpiled):
-    toisan_compiler = ToisanCompiler()
-    tree_factory = toisan_compiler.tree_factory
-    _ = ToisanGrammar.parse(program, tree_factory=tree_factory)
+@pytest.mark.parametrize("program, expected", data)
+def test_assign_statement(program, expected):
+    transpiled, _ = parse(program)
 
-    assert transpiled == toisan_compiler.compiled()
+    assert transpiled == expected
