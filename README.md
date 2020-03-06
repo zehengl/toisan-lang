@@ -4,6 +4,8 @@
 
 # toisan-lang
 
+![GitHub Workflow Status](https://img.shields.io/github/workflow/status/zehengl/toisan-lang/Python%20package)
+
 A programming language based on Toisanese, aka Taishanese, a dialect of Cantonese
 
 ## Install
