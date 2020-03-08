@@ -14,6 +14,8 @@
 
 A programming language based on Toisanese, aka Taishanese, a dialect of Cantonese
 
+See demo at [toisan-lang-demo.herokuapp.com](https://toisan-lang-demo.herokuapp.com/)
+
 ## Install
 
     pip install toisan-lang
