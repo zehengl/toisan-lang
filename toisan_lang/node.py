@@ -158,7 +158,11 @@ class ToisanNode(tuple):
         )
 
     def block(self, compiler):
-        return tuple(s.compiled for s in self.rhs if not isinstance(s.rule, Token))
+        result = tuple(s.compiled for s in self.rhs if not isinstance(s.rule, Token))
+        if not result:
+            result = ("pass",)
+
+        return result
 
     def START(self, compiler):
         begin_program, block = self.rhs[0], self.rhs[1]
