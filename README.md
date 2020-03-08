@@ -7,6 +7,10 @@
 ![GitHub Workflow Status](https://img.shields.io/github/workflow/status/zehengl/toisan-lang/Python%20package)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/ambv/black)
 [![Downloads](https://pepy.tech/badge/toisan-lang)](https://pepy.tech/project/toisan-lang)
+![PyPI](https://img.shields.io/pypi/v/toisan-lang)
+![PyPI - Python Version](https://img.shields.io/pypi/pyversions/toisan-lang)
+![PyPI - Wheel](https://img.shields.io/pypi/wheel/toisan-lang)
+![PyPI - License](https://img.shields.io/pypi/l/toisan-lang)
 
 A programming language based on Toisanese, aka Taishanese, a dialect of Cantonese
 
