@@ -82,6 +82,7 @@ class ToisanNode(tuple):
             K.less_than: "<",
             K._and_: "and",
             K._or_: "or",
+            K._in_: "in",
         }
         return tuple([left, mapping[op], right])
 

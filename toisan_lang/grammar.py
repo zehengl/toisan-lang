@@ -67,6 +67,7 @@ class ToisanGrammar(Grammar):
     subtract_one = exp << Token(K.subtract_one)
     logic_and = exp << Token(K._and_) << exp
     logic_or = exp << Token(K._or_) << exp
+    value_in = exp << Token(K._in_) << exp
 
     exp = Prio(
         constant,
@@ -78,6 +79,7 @@ class ToisanGrammar(Grammar):
         add_one | subtract_one,
         add | subtract,
         greater_than | less_than,
+        value_in,
         logic_and,
         logic_or,
     )
