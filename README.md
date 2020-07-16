@@ -4,7 +4,7 @@
 
 # toisan-lang
 
-![GitHub Workflow Status](https://img.shields.io/github/workflow/status/zehengl/toisan-lang/Python%20package)
+![pytest](https://github.com/zehengl/toisan-lang/workflows/pytest/badge.svg?branch=master)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/ambv/black)
 [![Downloads](https://pepy.tech/badge/toisan-lang)](https://pepy.tech/project/toisan-lang)
 ![PyPI](https://img.shields.io/pypi/v/toisan-lang)
