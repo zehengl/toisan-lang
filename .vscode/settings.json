@@ -10,6 +10,7 @@
   "python.linting.pylintPath": "pylint",
   "python.linting.pylintUseMinimalCheckers": false,
   "python.pythonPath": "venv\\Scripts\\python.exe",
-  "workbench.colorTheme": "Nord",
-  "workbench.iconTheme": "vscode-icons"
+  "workbench.iconTheme": "vscode-icons",
+  "workbench.colorTheme": "Oceanic Next (dimmed bg)",
+  "workbench.productIconTheme": "material-product-icons"
 }
