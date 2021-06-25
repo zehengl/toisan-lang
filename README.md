@@ -4,7 +4,7 @@
 
 # toisan-lang
 
-![pytest](https://github.com/zehengl/toisan-lang/workflows/pytest/badge.svg?branch=master)
+[![pytest](https://github.com/zehengl/toisan-lang/actions/workflows/pytest.yml/badge.svg)](https://github.com/zehengl/toisan-lang/actions/workflows/pytest.yml)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/ambv/black)
 [![Downloads](https://pepy.tech/badge/toisan-lang)](https://pepy.tech/project/toisan-lang)
 ![PyPI](https://img.shields.io/pypi/v/toisan-lang)
@@ -107,6 +107,6 @@ To run test, simply
 
 Happy hacking!
 
-<hr>
+## Credits
 
-<sup>Credit: logo from https://izihun.com/yishuzi/564471.html</sup>
+- logo from https://izihun.com/yishuzi/564471.html
