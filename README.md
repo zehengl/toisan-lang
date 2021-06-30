@@ -84,14 +84,16 @@ if __name__ == '__main__':
 
 ## Code Usage
 
-    from toisan_lang import parse
-    program = """
-    ...
-    """
-    code, tree = parse(program)
-    print(code)
-    print(tree)
-    exec(code)
+```python
+from toisan_lang import parse
+program = """
+...
+"""
+code, tree = parse(program)
+print(code)
+print(tree)
+exec(code)
+```
 
 ## Develop
 
