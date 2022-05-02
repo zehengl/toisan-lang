@@ -99,8 +99,8 @@ exec(code)
 
     git clone https://github.com/zehengl/toisan-lang.git
     cd toisan-lang
-    python -m venv venv
-    source venv/bin/activate
+    python -m venv .venv
+    source .venv/bin/activate
     pip install -r requirements-dev.txt
 
 To run test, simply
