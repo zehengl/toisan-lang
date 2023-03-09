@@ -2,9 +2,9 @@ import pytest
 
 from toisan_lang import parse
 
-from .testcases.compiler.as_long_as_statement import data as data_as_long_as_statement
-from .testcases.compiler.assign_statement import data as data_assign_statement
-from .testcases.compiler.if_statement import data as data_if_statement
+from compiler.as_long_as_statement import data as data_as_long_as_statement
+from compiler.assign_statement import data as data_assign_statement
+from compiler.if_statement import data as data_if_statement
 
 data = data_assign_statement + data_if_statement + data_as_long_as_statement
 
