@@ -23,7 +23,7 @@ theme:
   features:
     - header.autohide
     - content.code.copy
-repo_name: zehengl/toisan-lang
+repo_name: toisan-lang
 repo_url: https://github.com/zehengl/toisan-lang
 plugins:
   - search
