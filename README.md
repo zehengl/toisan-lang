@@ -6,7 +6,7 @@
 
 [![pytest](https://github.com/zehengl/toisan-lang/actions/workflows/pytest.yml/badge.svg)](https://github.com/zehengl/toisan-lang/actions/workflows/pytest.yml)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/ambv/black)
-[![Downloads](https://pepy.tech/badge/toisan-lang)](https://pepy.tech/project/toisan-lang)
+[![Downloads](https://static.pepy.tech/badge/toisan-lang)](https://pepy.tech/project/toisan-lang)
 ![PyPI](https://img.shields.io/pypi/v/toisan-lang)
 ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/toisan-lang)
 ![PyPI - Wheel](https://img.shields.io/pypi/wheel/toisan-lang)
