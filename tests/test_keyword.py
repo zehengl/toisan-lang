@@ -1,4 +1,4 @@
-from toisan_lang.keyword import keywords, ToisanKeyword
+from toisan_lang.keyword import ToisanKeyword, keywords
 
 
 def test_keywords():

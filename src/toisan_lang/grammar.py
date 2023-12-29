@@ -11,8 +11,8 @@ from lrparsing import (
     Tokens,
 )
 
-
-from .keyword import ToisanKeyword as K, keywords
+from .keyword import ToisanKeyword as K
+from .keyword import keywords
 
 
 class ToisanGrammar(Grammar):
@@ -21,7 +21,7 @@ class ToisanGrammar(Grammar):
     """
 
     class T(TokenRegistry):
-        name = Token(re=fr"((?![{keywords}0-9])[a-zA-Z\u4e00-\u9fff])+")
+        name = Token(re=rf"((?![{keywords}0-9])[a-zA-Z\u4e00-\u9fff])+")
         string = Token(re=r"“[^“”]*”")
         arabic_numeral = Token(re="[0-9]+")
         chinese_numeral = Token(re=rf"[{K.re_number}]")

@@ -1,8 +1,6 @@
 import argparse
 
-
 from . import parse
-
 
 parser = argparse.ArgumentParser(
     description=(
